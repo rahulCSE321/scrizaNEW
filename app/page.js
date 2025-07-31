@@ -164,7 +164,7 @@ export default function App() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <a href="#home" className="text-gray-700 hover:text-[#38857a] transition-colors">Home</a>
-              <a href="#about" className="text-gray-700 hover:text-[#38857a] transition-colors">About Us</a>
+              <a href="about" className="text-gray-700 hover:text-[#38857a] transition-colors">About Us</a>
               <a href="#products" className="text-gray-700 hover:text-[#38857a] transition-colors">Our Products</a>
               <a href="#services" className="text-gray-700 hover:text-[#38857a] transition-colors">Core Services</a>
               <a href="#contact" className="text-gray-700 hover:text-[#38857a] transition-colors">Contact Us</a>
