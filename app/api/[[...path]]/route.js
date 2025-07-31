@@ -1,104 +1,185 @@
-import { MongoClient } from 'mongodb'
-import { v4 as uuidv4 } from 'uuid'
 import { NextResponse } from 'next/server'
+import { MongoClient } from 'mongodb'
 
-// MongoDB connection
 let client
 let db
 
-async function connectToMongo() {
+async function connectDB() {
   if (!client) {
     client = new MongoClient(process.env.MONGO_URL)
     await client.connect()
-    db = client.db(process.env.DB_NAME)
+    db = client.db('scriza_website')
   }
   return db
 }
 
-// Helper function to handle CORS
-function handleCORS(response) {
-  response.headers.set('Access-Control-Allow-Origin', '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  response.headers.set('Access-Control-Allow-Credentials', 'true')
-  return response
-}
-
-// OPTIONS handler for CORS
-export async function OPTIONS() {
-  return handleCORS(new NextResponse(null, { status: 200 }))
-}
-
-// Route handler function
-async function handleRoute(request, { params }) {
-  const { path = [] } = params
-  const route = `/${path.join('/')}`
-  const method = request.method
-
+// Handle POST requests for contact form submissions
+export async function POST(request, { params }) {
   try {
-    const db = await connectToMongo()
-
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/root' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-    // Root endpoint - GET /api/root (since /api/ is not accessible with catch-all)
-    if (route === '/' && method === 'GET') {
-      return handleCORS(NextResponse.json({ message: "Hello World" }))
-    }
-
-    // Status endpoints - POST /api/status
-    if (route === '/status' && method === 'POST') {
+    const path = params.path?.join('/') || ''
+    
+    if (path === 'contact') {
+      const database = await connectDB()
       const body = await request.json()
       
-      if (!body.client_name) {
-        return handleCORS(NextResponse.json(
-          { error: "client_name is required" }, 
-          { status: 400 }
-        ))
+      const contactData = {
+        ...body,
+        timestamp: new Date(),
+        status: 'new'
       }
-
-      const statusObj = {
-        id: uuidv4(),
-        client_name: body.client_name,
-        timestamp: new Date()
-      }
-
-      await db.collection('status_checks').insertOne(statusObj)
-      return handleCORS(NextResponse.json(statusObj))
-    }
-
-    // Status endpoints - GET /api/status
-    if (route === '/status' && method === 'GET') {
-      const statusChecks = await db.collection('status_checks')
-        .find({})
-        .limit(1000)
-        .toArray()
-
-      // Remove MongoDB's _id field from response
-      const cleanedStatusChecks = statusChecks.map(({ _id, ...rest }) => rest)
       
-      return handleCORS(NextResponse.json(cleanedStatusChecks))
+      const result = await database.collection('contacts').insertOne(contactData)
+      
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Contact form submitted successfully',
+        id: result.insertedId 
+      })
     }
-
-    // Route not found
-    return handleCORS(NextResponse.json(
-      { error: `Route ${route} not found` }, 
-      { status: 404 }
-    ))
-
+    
+    return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
   } catch (error) {
     console.error('API Error:', error)
-    return handleCORS(NextResponse.json(
-      { error: "Internal server error" }, 
+    return NextResponse.json(
+      { error: 'Internal server error' }, 
       { status: 500 }
-    ))
+    )
   }
 }
 
-// Export all HTTP methods
-export const GET = handleRoute
-export const POST = handleRoute
-export const PUT = handleRoute
-export const DELETE = handleRoute
-export const PATCH = handleRoute
+// Handle GET requests for retrieving data
+export async function GET(request, { params }) {
+  try {
+    const path = params.path?.join('/') || ''
+    const url = new URL(request.url)
+    const searchParams = url.searchParams
+    
+    if (path === 'contacts') {
+      const database = await connectDB()
+      
+      // Get pagination parameters
+      const page = parseInt(searchParams.get('page')) || 1
+      const limit = parseInt(searchParams.get('limit')) || 10
+      const skip = (page - 1) * limit
+      
+      // Get filter parameters
+      const status = searchParams.get('status')
+      const type = searchParams.get('type')
+      
+      let filter = {}
+      if (status) filter.status = status
+      if (type) filter.type = type
+      
+      const contacts = await database.collection('contacts')
+        .find(filter)
+        .sort({ timestamp: -1 })
+        .skip(skip)
+        .limit(limit)
+        .toArray()
+      
+      const total = await database.collection('contacts').countDocuments(filter)
+      
+      return NextResponse.json({
+        contacts,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages: Math.ceil(total / limit)
+        }
+      })
+    }
+    
+    if (path === 'stats') {
+      const database = await connectDB()
+      
+      const totalContacts = await database.collection('contacts').countDocuments()
+      const newContacts = await database.collection('contacts').countDocuments({ status: 'new' })
+      const demoRequests = await database.collection('contacts').countDocuments({ type: 'demo' })
+      const contactRequests = await database.collection('contacts').countDocuments({ type: 'contact' })
+      
+      return NextResponse.json({
+        totalContacts,
+        newContacts,
+        demoRequests,
+        contactRequests
+      })
+    }
+    
+    return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' }, 
+      { status: 500 }
+    )
+  }
+}
+
+// Handle PUT requests for updating data
+export async function PUT(request, { params }) {
+  try {
+    const path = params.path?.join('/') || ''
+    
+    if (path.startsWith('contacts/')) {
+      const database = await connectDB()
+      const contactId = path.split('/')[1]
+      const body = await request.json()
+      
+      const result = await database.collection('contacts').updateOne(
+        { _id: new ObjectId(contactId) },
+        { $set: { ...body, updatedAt: new Date() } }
+      )
+      
+      if (result.matchedCount === 0) {
+        return NextResponse.json({ error: 'Contact not found' }, { status: 404 })
+      }
+      
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Contact updated successfully' 
+      })
+    }
+    
+    return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' }, 
+      { status: 500 }
+    )
+  }
+}
+
+// Handle DELETE requests
+export async function DELETE(request, { params }) {
+  try {
+    const path = params.path?.join('/') || ''
+    
+    if (path.startsWith('contacts/')) {
+      const database = await connectDB()
+      const contactId = path.split('/')[1]
+      
+      const result = await database.collection('contacts').deleteOne(
+        { _id: new ObjectId(contactId) }
+      )
+      
+      if (result.deletedCount === 0) {
+        return NextResponse.json({ error: 'Contact not found' }, { status: 404 })
+      }
+      
+      return NextResponse.json({ 
+        success: true, 
+        message: 'Contact deleted successfully' 
+      })
+    }
+    
+    return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
+  } catch (error) {
+    console.error('API Error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' }, 
+      { status: 500 }
+    )
+  }
+}
