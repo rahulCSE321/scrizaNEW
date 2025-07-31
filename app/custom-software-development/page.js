@@ -424,12 +424,16 @@ export default function CustomSoftwarePage() {
           <div className="mb-20">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative order-2 lg:order-1">
-                <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl p-8">
-                  <div className="w-full h-64 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl flex items-center justify-center">
-                    <div className="text-center text-gray-600">
-                      <DollarSign className="h-16 w-16 mx-auto mb-4" />
-                      <p className="text-lg font-semibold">Cost Optimization</p>
-                    </div>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1609659901102-176a8f275b15?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHByb2R1Y3Rpdml0eXxlbnwwfHx8fDE3NTM5NjQ5MDZ8MA&ixlib=rb-4.1.0&q=85" 
+                    alt="Business Productivity Workspace" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-green-600/90 via-green-600/20 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <h3 className="text-xl font-bold mb-2">Cost Optimization</h3>
+                    <p className="text-white/90">Maximizing ROI through efficient solutions</p>
                   </div>
                 </div>
               </div>
