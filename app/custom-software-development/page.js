@@ -539,31 +539,48 @@ export default function CustomSoftwarePage() {
 
           {/* Development Services */}
           <div className="mb-20">
-            <Card className="bg-white shadow-lg border-0">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Custom Development Services</h3>
-                
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  {developmentServices.map((service, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#38857a] to-[#FF914C] flex items-center justify-center text-white flex-shrink-0">
-                        {service.icon}
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">{service.title}:</h4>
-                        <p className="text-gray-600 text-sm">{service.description}</p>
-                      </div>
-                    </div>
-                  ))}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50JTIwdGVhbXxlbnwwfHx8fDE3NTM5NjQ5MDB8MA&ixlib=rb-4.1.0&q=85" 
+                    alt="Professional Development Meeting" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38857a]/90 via-[#38857a]/20 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <h3 className="text-xl font-bold mb-2">Development Excellence</h3>
+                    <p className="text-white/90">Professional development services</p>
+                  </div>
                 </div>
-                
-                <div className="bg-gradient-to-r from-[#38857a]/10 to-[#FF914C]/10 rounded-xl p-6">
-                  <p className="text-gray-700 leading-relaxed">
-                    We sit down with to chat about your needs. We then whip up custom software that perfectly suits your business. Our team handles everything from the initial brainstorming to the final rollout. And the best part? We are always here for software support. Have a quick question or a new feature, our support team has got your back. Let us create some amazing software solutions together.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              
+              <Card className="bg-white shadow-lg border-0">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Custom Development Services</h3>
+                  
+                  <div className="grid md:grid-cols-1 gap-6 mb-8">
+                    {developmentServices.map((service, index) => (
+                      <div key={index} className="flex items-start space-x-4">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#38857a] to-[#FF914C] flex items-center justify-center text-white flex-shrink-0">
+                          {service.icon}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 mb-1">{service.title}:</h4>
+                          <p className="text-gray-600 text-sm">{service.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-[#38857a]/10 to-[#FF914C]/10 rounded-xl p-6">
+                    <p className="text-gray-700 leading-relaxed">
+                      We sit down with to chat about your needs. We then whip up custom software that perfectly suits your business. Our team handles everything from the initial brainstorming to the final rollout. And the best part? We are always here for software support. Have a quick question or a new feature, our support team has got your back. Let us create some amazing software solutions together.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Why Choose Us Section */}
