@@ -640,24 +640,34 @@ export default function CustomSoftwarePage() {
 
           {/* CTA Section */}
           <div className="mb-20">
-            <div className="bg-gradient-to-r from-[#38857a] to-[#FF914C] rounded-2xl p-8 lg:p-12 text-white text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                Begin with the best custom software developer today!
-              </h2>
-              <p className="text-xl text-white/90 mb-6 max-w-4xl mx-auto">
-                Thousands of businesses in your industry are getting help from the best custom software development companies to the next level? What is ceasing you from growing your productivity levels by 50%?
-              </p>
-              <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
-                Contact us today to get into your custom software development needs. Our team is here to create software that drives success. Partner with the leading custom development company and experience the difference custom solutions can make.
-              </p>
-              <Button 
-                size="lg" 
-                className="bg-white text-[#38857a] hover:bg-white/90"
-                onClick={() => document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})}
-              >
-                Get Started Now
-                <Send className="ml-2 h-5 w-5" />
-              </Button>
+            <div className="relative overflow-hidden rounded-2xl">
+              <div className="absolute inset-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHw0fHx0ZWNobm9sb2d5fGVufDB8fHx8MTc1MzkwOTQyM3ww&ixlib=rb-4.1.0&q=85" 
+                  alt="Team Working Together" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#38857a]/95 to-[#FF914C]/95"></div>
+              </div>
+              <div className="relative z-10 p-8 lg:p-12 text-white text-center">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+                  Begin with the best custom software developer today!
+                </h2>
+                <p className="text-xl text-white/90 mb-6 max-w-4xl mx-auto">
+                  Thousands of businesses in your industry are getting help from the best custom software development companies to the next level? What is ceasing you from growing your productivity levels by 50%?
+                </p>
+                <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
+                  Contact us today to get into your custom software development needs. Our team is here to create software that drives success. Partner with the leading custom development company and experience the difference custom solutions can make.
+                </p>
+                <Button 
+                  size="lg" 
+                  className="bg-white text-[#38857a] hover:bg-white/90"
+                  onClick={() => document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})}
+                >
+                  Get Started Now
+                  <Send className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
             </div>
           </div>
 
