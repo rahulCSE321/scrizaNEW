@@ -162,21 +162,28 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#38857a]/10 to-[#FF914C]/10"></div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1607799279861-4dd421887fb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHxibHVlfDE3NTM5NTQ4Njd8MA&ixlib=rb-4.1.0&q=85)'
+          }}
+        >
+          <div className="absolute inset-0 bg-[#38857a]/80"></div>
+        </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center space-y-8">
             <div className="space-y-4">
-              <Badge variant="outline" className="text-[#38857a] border-[#38857a] text-lg px-6 py-2">
+              <Badge variant="outline" className="text-white border-white text-lg px-6 py-2">
                 About
               </Badge>
-              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <a href="/" className="hover:text-[#38857a] transition-colors">Home</a>
+              <div className="flex items-center justify-center space-x-2 text-sm text-white/80">
+                <a href="/" className="hover:text-white transition-colors">Home</a>
                 <span>/</span>
-                <span className="text-[#38857a]">About Us</span>
+                <span className="text-white">About Us</span>
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
                 We Core Your 
-                <span className="block" style={{color: '#38857a'}}>Future</span>
+                <span className="block" style={{color: '#FF914C'}}>Future</span>
               </h1>
             </div>
           </div>
