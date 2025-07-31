@@ -11,7 +11,7 @@ import sys
 from datetime import datetime
 
 # Get base URL from environment
-BASE_URL = "https://a31d3fe1-4724-46ac-b6f5-6926cc402651.preview.emergentagent.com"
+BASE_URL = "https://30e5fb3d-a4c5-411d-be3b-1a3afc9877e2.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 class BackendTester:
