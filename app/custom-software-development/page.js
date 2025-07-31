@@ -404,12 +404,16 @@ export default function CustomSoftwarePage() {
               </div>
               
               <div className="relative">
-                <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8">
-                  <div className="w-full h-64 bg-gradient-to-br from-[#38857a]/20 to-[#FF914C]/20 rounded-xl flex items-center justify-center">
-                    <div className="text-center text-gray-600">
-                      <BarChart3 className="h-16 w-16 mx-auto mb-4" />
-                      <p className="text-lg font-semibold">Efficiency Analytics</p>
-                    </div>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50JTIwdGVhbXxlbnwwfHx8fDE3NTM5NjQ5MDB8MA&ixlib=rb-4.1.0&q=85" 
+                    alt="Software Development Team Collaboration" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#38857a]/90 via-[#38857a]/20 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <h3 className="text-xl font-bold mb-2">Team Collaboration</h3>
+                    <p className="text-white/90">Building efficient solutions together</p>
                   </div>
                 </div>
               </div>
