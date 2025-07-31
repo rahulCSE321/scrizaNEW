@@ -490,12 +490,16 @@ export default function CustomSoftwarePage() {
               </div>
               
               <div className="relative">
-                <div className="bg-gradient-to-br from-red-500/10 to-pink-500/10 rounded-2xl p-8">
-                  <div className="w-full h-64 bg-gradient-to-br from-red-500/20 to-pink-500/20 rounded-xl flex items-center justify-center">
-                    <div className="text-center text-gray-600">
-                      <Shield className="h-16 w-16 mx-auto mb-4" />
-                      <p className="text-lg font-semibold">Data Protection</p>
-                    </div>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwyfHx0ZWNobm9sb2d5fGVufDB8fHx8MTc1MzkwOTQyM3ww&ixlib=rb-4.1.0&q=85" 
+                    alt="Secure Software Development" 
+                    className="w-full h-80 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-red-600/90 via-red-600/20 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <h3 className="text-xl font-bold mb-2">Data Protection</h3>
+                    <p className="text-white/90">Advanced security measures & encryption</p>
                   </div>
                 </div>
               </div>
