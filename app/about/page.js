@@ -165,7 +165,7 @@ export default function AboutPage() {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1607799279861-4dd421887fb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50fGVufDB8fHxibHVlfDE3NTM5NTQ4Njd8MA&ixlib=rb-4.1.0&q=85)'
+            backgroundImage: 'url(https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMG1lZXRpbmd8ZW58MHx8fHwxNzUzOTU1MjAzfDA&ixlib=rb-4.1.0&q=85)'
           }}
         >
           <div className="absolute inset-0 bg-[#38857a]/80"></div>
